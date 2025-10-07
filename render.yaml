@@ -1,0 +1,8 @@
+static_sites:
+  - type: static
+    name: student-union-dashboard
+    buildCommand: npm install && npm run build
+    publishDirectory: ./dist
+    envVars:
+      - key: VITE_API_URL
+        value: https://your-backend-url.onrender.com/api/v1
