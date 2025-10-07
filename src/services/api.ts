@@ -81,3 +81,14 @@ export const createCollege = async (data: CreateCollegeData): Promise<College> =
   const response = await apiClient.post('/colleges', data);
   return response.data;
 };
+
+// دالة لتحديث كلية
+export const updateCollege = async (id: string, data: CreateCollegeData): Promise<College> => {
+  const response = await apiClient.put(`/colleges/${id}`, data);
+  return response.data;
+};
+
+// دالة لحذف كلية
+export const deleteCollege = async (id: string): Promise<void> => {
+  await apiClient.delete(`/colleges/${id}`);
+};

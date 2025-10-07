@@ -3,10 +3,11 @@ import { useState } from 'react';
 import { Title, Table, Loader, Alert, Button, Group, Modal, Stack, TextInput, NumberInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { getColleges, createCollege, type College } from '../services/api';
+import { getColleges, createCollege, updateCollege, deleteCollege, type College } from '../services/api';
 
 export function CollegesPage() {
   const [modalOpened, setModalOpened] = useState(false);
+  const [editingCollege, setEditingCollege] = useState<College | null>(null);
   const queryClient = useQueryClient();
 
   // 1. جلب بيانات الكليات
@@ -27,22 +28,61 @@ export function CollegesPage() {
     },
   });
 
-  // 3. إعداد الـ Mutation لإنشاء كلية
-  const createMutation = useMutation({
-    mutationFn: createCollege,
+  // 3. إعداد الـ Mutation لإنشاء/تعديل كلية
+  const saveMutation = useMutation({
+    mutationFn: (values: { name: string; academicYearsCount: number }) => {
+      if (editingCollege) {
+        return updateCollege(editingCollege.id, values);
+      }
+      return createCollege(values);
+    },
     onSuccess: () => {
-      // عند النجاح: أعد جلب بيانات الكليات لتحديث الجدول
       queryClient.invalidateQueries({ queryKey: ['colleges'] });
-      // أغلق النافذة وأعد تعيين النموذج
       setModalOpened(false);
+      setEditingCollege(null);
       form.reset();
     },
     onError: (err: any) => {
-      // يمكنك عرض رسالة خطأ هنا باستخدام نظام إشعارات Mantine لاحقًا
-      console.error("Error creating college:", err);
-      alert(`فشل إنشاء الكلية: ${err.response?.data?.message || err.message}`);
+      console.error("Error saving college:", err);
+      alert(`فشل حفظ الكلية: ${err.response?.data?.message || err.message}`);
     }
   });
+
+  // 4. إعداد الـ Mutation للحذف
+  const deleteMutation = useMutation({
+    mutationFn: deleteCollege,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['colleges'] });
+    },
+    onError: (err: any) => {
+      console.error("Error deleting college:", err);
+      alert(`فشل حذف الكلية: ${err.response?.data?.message || err.message}`);
+    }
+  });
+
+  // دالة لفتح نافذة التعديل
+  const handleEdit = (college: College) => {
+    setEditingCollege(college);
+    form.setValues({
+      name: college.name,
+      academicYearsCount: college.academicYearsCount,
+    });
+    setModalOpened(true);
+  };
+
+  // دالة لإغلاق النافذة
+  const handleClose = () => {
+    setModalOpened(false);
+    setEditingCollege(null);
+    form.reset();
+  };
+
+  // دالة للحذف مع تأكيد
+  const handleDelete = (college: College) => {
+    if (window.confirm(`هل أنت متأكد من حذف "${college.name}"؟`)) {
+      deleteMutation.mutate(college.id);
+    }
+  };
 
   // 4. عرض حالة التحميل أو الخطأ
   if (isLoading) return <Loader />;
@@ -54,8 +94,25 @@ export function CollegesPage() {
       <Table.Td>{college.name}</Table.Td>
       <Table.Td>{college.academicYearsCount}</Table.Td>
       <Table.Td>
-        {/* يمكنك إضافة أزرار التعديل والحذف هنا لاحقًا */}
-        <Button size="xs" variant="light">تعديل</Button>
+        <Group gap="xs">
+          <Button 
+            size="xs" 
+            variant="light" 
+            color="blue"
+            onClick={() => handleEdit(college)}
+          >
+            تعديل
+          </Button>
+          <Button 
+            size="xs" 
+            variant="light" 
+            color="red"
+            onClick={() => handleDelete(college)}
+            loading={deleteMutation.isPending}
+          >
+            حذف
+          </Button>
+        </Group>
       </Table.Td>
     </Table.Tr>
   ));
@@ -84,13 +141,13 @@ export function CollegesPage() {
         </Alert>
       )}
 
-      {/* نافذة إنشاء كلية جديدة */}
+      {/* نافذة إنشاء/تعديل كلية */}
       <Modal
         opened={modalOpened}
-        onClose={() => setModalOpened(false)}
-        title="إضافة كلية جديدة"
+        onClose={handleClose}
+        title={editingCollege ? "تعديل الكلية" : "إضافة كلية جديدة"}
       >
-        <form onSubmit={form.onSubmit((values) => createMutation.mutate(values))}>
+        <form onSubmit={form.onSubmit((values) => saveMutation.mutate(values))}>
           <Stack>
             <TextInput
               required
@@ -106,8 +163,8 @@ export function CollegesPage() {
               max={10}
               {...form.getInputProps('academicYearsCount')}
             />
-            <Button type="submit" mt="md" loading={createMutation.isPending}>
-              إنشاء الكلية
+            <Button type="submit" mt="md" loading={saveMutation.isPending}>
+              {editingCollege ? "حفظ التعديلات" : "إنشاء الكلية"}
             </Button>
           </Stack>
         </form>
