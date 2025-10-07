@@ -1,0 +1,1069 @@
+﻿### مجلد: D:\project\student-union\student-union-dashboard
+### مسار نسبي: .
+
+### مجلد: D:\project\student-union\student-union-dashboard\public
+### مسار نسبي: public
+
+### مجلد: D:\project\student-union\student-union-dashboard\src
+### مسار نسبي: src
+
+### مجلد: D:\project\student-union\student-union-dashboard\src\layouts
+### مسار نسبي: src\layouts
+
+### مجلد: D:\project\student-union\student-union-dashboard\src\modules
+### مسار نسبي: src\modules
+
+### مجلد: D:\project\student-union\student-union-dashboard\src\pages
+### مسار نسبي: src\pages
+
+### مجلد: D:\project\student-union\student-union-dashboard\src\router
+### مسار نسبي: src\router
+
+### مجلد: D:\project\student-union\student-union-dashboard\src\services
+### مسار نسبي: src\services
+
+### مجلد: D:\project\student-union\student-union-dashboard\src\utils
+### مسار نسبي: src\utils
+
+### مجلد: D:\project\student-union\student-union-dashboard\src\modules\users
+### مسار نسبي: src\modules\users
+
+### مجلد: D:\project\student-union\student-union-dashboard\src\modules\users\api
+### مسار نسبي: src\modules\users\api
+
+### ملف: D:\project\student-union\student-union-dashboard\.gitignore
+### مسار نسبي: .gitignore
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+------------------------------------------------------------
+
+### ملف: D:\project\student-union\student-union-dashboard\eslint.config.js
+### مسار نسبي: eslint.config.js
+import js from '@eslint/js'
+import globals from 'globals'
+import reactHooks from 'eslint-plugin-react-hooks'
+import reactRefresh from 'eslint-plugin-react-refresh'
+import tseslint from 'typescript-eslint'
+import { defineConfig, globalIgnores } from 'eslint/config'
+
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      js.configs.recommended,
+      tseslint.configs.recommended,
+      reactHooks.configs['recommended-latest'],
+      reactRefresh.configs.vite,
+    ],
+    languageOptions: {
+      ecmaVersion: 2020,
+      globals: globals.browser,
+    },
+  },
+])
+
+------------------------------------------------------------
+
+### ملف: D:\project\student-union\student-union-dashboard\index.html
+### مسار نسبي: index.html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + React + TS</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
+------------------------------------------------------------
+
+### ملف: D:\project\student-union\student-union-dashboard\package.json
+### مسار نسبي: package.json
+{
+  "name": "student-union-dashboard",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@mantine/core": "^8.3.1",
+    "@mantine/form": "^8.3.1",
+    "@mantine/hooks": "^8.3.1",
+    "@tanstack/react-query": "^5.89.0",
+    "autoprefixer": "^10.4.21",
+    "axios": "^1.12.2",
+    "postcss-preset-mantine": "^1.18.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "react-router-dom": "^7.9.1",
+    "tailwindcss": "^4.1.13"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.35.0",
+    "@types/react": "^19.1.13",
+    "@types/react-dom": "^19.1.9",
+    "@types/react-router-dom": "^5.3.3",
+    "@vitejs/plugin-react": "^5.0.2",
+    "eslint": "^9.35.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.20",
+    "globals": "^16.4.0",
+    "postcss": "^8.5.6",
+    "postcss-simple-vars": "^7.0.1",
+    "typescript": "~5.8.3",
+    "typescript-eslint": "^8.43.0",
+    "vite": "^7.1.6"
+  }
+}
+
+------------------------------------------------------------
+
+### ملف: D:\project\student-union\student-union-dashboard\postcss.config.js
+### مسار نسبي: postcss.config.js
+import postcssPresetMantine from 'postcss-preset-mantine';
+import postcssSimpleVars from 'postcss-simple-vars';
+
+export default {
+  plugins: {
+    'postcss-preset-mantine': postcssPresetMantine,
+    'postcss-simple-vars': {
+      variables: {
+        'mantine-breakpoint-xs': '36em',
+        'mantine-breakpoint-sm': '48em',
+        'mantine-breakpoint-md': '62em',
+        'mantine-breakpoint-lg': '75em',
+        'mantine-breakpoint-xl': '88em',
+      },
+    },
+  },
+};
+------------------------------------------------------------
+
+### ملف: D:\project\student-union\student-union-dashboard\README.md
+### مسار نسبي: README.md
+# React + TypeScript + Vite
+
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+
+Currently, two official plugins are available:
+
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+## Expanding the ESLint configuration
+
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+
+```js
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+
+      // Remove tseslint.configs.recommended and replace with this
+      tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      tseslint.configs.stylisticTypeChecked,
+
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
+
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
+
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
+
+------------------------------------------------------------
+
+### ملف: D:\project\student-union\student-union-dashboard\tsconfig.app.json
+### مسار نسبي: tsconfig.app.json
+{
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+    "target": "ES2022",
+    "useDefineForClassFields": true,
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "jsx": "react-jsx",
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "erasableSyntaxOnly": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true
+  },
+  "include": ["src"]
+}
+
+------------------------------------------------------------
+
+### ملف: D:\project\student-union\student-union-dashboard\tsconfig.json
+### مسار نسبي: tsconfig.json
+{
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ]
+}
+
+------------------------------------------------------------
+
+### ملف: D:\project\student-union\student-union-dashboard\tsconfig.node.json
+### مسار نسبي: tsconfig.node.json
+{
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
+    "target": "ES2023",
+    "lib": ["ES2023"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "erasableSyntaxOnly": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true
+  },
+  "include": ["vite.config.ts"]
+}
+
+------------------------------------------------------------
+
+### ملف: D:\project\student-union\student-union-dashboard\vite.config.ts
+### مسار نسبي: vite.config.ts
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+// https://vite.dev/config/
+export default defineConfig({
+  plugins: [react()],
+})
+
+------------------------------------------------------------
+
+### ملف: D:\project\student-union\student-union-dashboard\src\App.css
+### مسار نسبي: src\App.css
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+------------------------------------------------------------
+
+### ملف: D:\project\student-union\student-union-dashboard\src\App.tsx
+### مسار نسبي: src\App.tsx
+// src/App.tsx
+function App() {
+  // هذا المكون لم يعد يستخدم مباشرة من قبل الـ router
+  // يمكن استخدامه لاحقًا كحاوية عامة إذا احتجنا
+  return <div>Welcome to the App</div>;
+}
+export default App;
+------------------------------------------------------------
+
+### ملف: D:\project\student-union\student-union-dashboard\src\index.css
+### مسار نسبي: src\index.css
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+
+------------------------------------------------------------
+
+### ملف: D:\project\student-union\student-union-dashboard\src\main.tsx
+### مسار نسبي: src\main.tsx
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { MantineProvider } from '@mantine/core';
+import { RouterProvider } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+import { router } from './router';
+
+// استيراد ملفات CSS الأساسية لـ Mantine
+import '@mantine/core/styles.css';
+
+// إنشاء نسخة (instance) من QueryClient
+const queryClient = new QueryClient();
+
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+    {/* 
+      ترتيب الـ Providers مهم.
+      QueryClientProvider يجب أن يغلف أي جزء من التطبيق يستخدم React Query (مثل صفحة تسجيل الدخول).
+    */}
+    <QueryClientProvider client={queryClient}>
+      {/* 
+        MantineProvider يوفر الـ theme لجميع مكونات Mantine.
+      */}
+      <MantineProvider defaultColorScheme="dark">
+        {/* 
+          RouterProvider هو الذي يقوم بعرض الصفحات بناءً على المسار الحالي في الـ URL.
+        */}
+        <RouterProvider router={router} />
+      </MantineProvider>
+    </QueryClientProvider>
+  </React.StrictMode>,
+);
+------------------------------------------------------------
+
+### ملف: D:\project\student-union\student-union-dashboard\src\vite-env.d.ts
+### مسار نسبي: src\vite-env.d.ts
+/// <reference types="vite/client" />
+
+------------------------------------------------------------
+
+### ملف: D:\project\student-union\student-union-dashboard\src\layouts\DashboardLayout.tsx
+### مسار نسبي: src\layouts\DashboardLayout.tsx
+import { AppShell, Burger, Group, NavLink, Title } from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
+import { NavLink as RouterNavLink, Outlet } from 'react-router-dom';
+// يمكنك استيراد أيقونات من مكتبة مثل react-icons إذا أردت
+// import { IconGauge, IconUsers } from '@tabler/icons-react';
+
+export function DashboardLayout() {
+  const [opened, { toggle }] = useDisclosure();
+
+  const handleLogout = () => {
+    localStorage.removeItem('authToken');
+    window.location.href = '/login';
+  };
+
+  return (
+    <AppShell
+      header={{ height: 60 }}
+      navbar={{ width: 300, breakpoint: 'sm', collapsed: { mobile: !opened } }}
+      padding="md"
+    >
+      <AppShell.Header>
+        <Group h="100%" px="md" justify="space-between">
+          <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
+          <Title order={4}>لوحة تحكم اتحاد الطلبة</Title>
+          {/* زر تسجيل الخروج يمكن وضعه هنا */}
+          <button onClick={handleLogout} style={{ background: 'none', border: 'none', color: 'red', cursor: 'pointer' }}>
+            تسجيل الخروج
+          </button>
+        </Group>
+      </AppShell.Header>
+
+      <AppShell.Navbar p="md">
+        <Title order={5} mb="lg">القائمة</Title>
+        {/* 
+          استخدام NavLink من Mantine للتصميم
+          واستخدام RouterNavLink من react-router للتنقل
+        */}
+        <NavLink
+          label="طلبات الانضمام"
+          component={RouterNavLink}
+          to="/"
+          // leftSection={<IconGauge size="1rem" stroke={1.5} />}
+        />
+        <NavLink
+          label="إدارة الكليات"
+          component={RouterNavLink}
+          to="/colleges"
+          // leftSection={<IconUsers size="1rem" stroke={1.5} />}
+        />
+      </AppShell.Navbar>
+
+      <AppShell.Main>
+        {/* 
+          <Outlet /> هو المكان الذي سيتم فيه عرض محتوى الصفحة الحالية
+          (مثل صفحة الطلبات أو صفحة الكليات)
+        */}
+        <Outlet />
+      </AppShell.Main>
+    </AppShell>
+  );
+}
+------------------------------------------------------------
+
+### ملف: D:\project\student-union\student-union-dashboard\src\modules\users\api\users.routes.ts
+### مسار نسبي: src\modules\users\api\users.routes.ts
+// // ... imports ...
+// import { User } from '../models/user.model';
+
+// // ... router.post('/login', loginHandler); ...
+
+// // مسار مؤقت لإنشاء المدير - احذفه بعد الاستخدام
+// router.post('/setup-admin', async (req, res) => {
+//   try {
+//     const adminExists = await User.findOne({ email: 'admin@example.com' });
+//     if (adminExists) {
+//       return res.status(400).send('Admin already exists.');
+//     }
+//     await User.create({
+//       email: 'admin@example.com',
+//       password: 'verySecurePassword123',
+//       role: 'admin'
+//     });
+//     res.status(201).send('Admin user created successfully!');
+//   } catch (error) {
+//     res.status(500).send('Error creating admin');
+//   }
+// });
+
+// export default router;
+------------------------------------------------------------
+
+### ملف: D:\project\student-union\student-union-dashboard\src\pages\ApplicationsPage.tsx
+### مسار نسبي: src\pages\ApplicationsPage.tsx
+// src/pages/ApplicationsPage.tsx
+import { Title, Table, Loader, Alert, Badge, Card, Text, Group, Stack, Button, Modal, ScrollArea } from '@mantine/core';
+import { useQuery } from '@tanstack/react-query';
+import { getApplications } from '../services/api';
+import type { Application } from '../services/api';
+import { useState } from 'react';
+import { translateFieldName } from '../utils/fieldMapping';
+
+export function ApplicationsPage() {
+  const [selectedApplication, setSelectedApplication] = useState<Application | null>(null);
+  const [modalOpened, setModalOpened] = useState(false);
+
+  // استخدام useQuery لجلب البيانات من الـ API
+  const { data, isLoading, isError, error } = useQuery<Application[], Error>({
+    queryKey: ['applications'],
+    queryFn: getApplications,
+  });
+
+  // حالة التحميل
+  if (isLoading) {
+    return <Loader />;
+  }
+
+  // حالة الخطأ
+  if (isError) {
+    return <Alert color="red" title="حدث خطأ">
+      {error.message || 'لم نتمكن من جلب البيانات. حاول مرة أخرى.'}
+    </Alert>;
+  }
+
+  // إنشاء صفوف الجدول من البيانات
+  const rows = data?.map((app) => {
+    const statusColor = {
+      pending: 'yellow',
+      accepted: 'green',
+      rejected: 'red',
+    }[app.status];
+
+    const statusText = {
+      pending: 'قيد المراجعة',
+      accepted: 'مقبول',
+      rejected: 'مرفوض',
+    }[app.status];
+
+    return (
+      <Table.Tr key={app.id}>
+        <Table.Td>{app.fullName}</Table.Td>
+        <Table.Td>{app.phoneNumber}</Table.Td>
+        <Table.Td>{app.college}</Table.Td>
+        <Table.Td>{app.specialization}</Table.Td>
+        <Table.Td>
+          <Badge color={statusColor} variant="light">
+            {statusText}
+          </Badge>
+        </Table.Td>
+        <Table.Td>{new Date(app.createdAt).toLocaleDateString('ar-SA')}</Table.Td>
+        <Table.Td>
+          <Button 
+            size="xs" 
+            variant="light" 
+            onClick={() => {
+              setSelectedApplication(app);
+              setModalOpened(true);
+            }}
+          >
+            عرض التفاصيل
+          </Button>
+        </Table.Td>
+      </Table.Tr>
+    );
+  });
+
+  return (
+    <>
+      <Title order={2} mb="xl">طلبات الانضمام للفريق الإعلامي</Title>
+      
+      {data && data.length > 0 ? (
+        <>
+          <Table striped highlightOnHover withTableBorder withColumnBorders>
+            <Table.Thead>
+              <Table.Tr>
+                <Table.Th>الاسم الكامل</Table.Th>
+                <Table.Th>رقم الهاتف</Table.Th>
+                <Table.Th>الكلية</Table.Th>
+                <Table.Th>التخصص</Table.Th>
+                <Table.Th>الحالة</Table.Th>
+                <Table.Th>تاريخ التقديم</Table.Th>
+                <Table.Th>الإجراءات</Table.Th>
+              </Table.Tr>
+            </Table.Thead>
+            <Table.Tbody>{rows}</Table.Tbody>
+          </Table>
+
+          {/* نافذة عرض التفاصيل */}
+          <Modal
+            opened={modalOpened}
+            onClose={() => setModalOpened(false)}
+            title="تفاصيل طلب الانضمام"
+            size="lg"
+            scrollAreaComponent={ScrollArea.Autosize}
+          >
+            {selectedApplication && (
+              <Stack gap="md">
+                {/* المعلومات الشخصية */}
+                <Card withBorder p="md">
+                  <Title order={4} mb="md">المعلومات الشخصية</Title>
+                  <Stack gap="sm">
+                    <Group>
+                      <Text fw={500}>الاسم الكامل:</Text>
+                      <Text>{selectedApplication.fullName}</Text>
+                    </Group>
+                    <Group>
+                      <Text fw={500}>رقم الهاتف:</Text>
+                      <Text>{selectedApplication.phoneNumber}</Text>
+                    </Group>
+                    <Group>
+                      <Text fw={500}>الكلية:</Text>
+                      <Text>{selectedApplication.college}</Text>
+                    </Group>
+                    <Group>
+                      <Text fw={500}>التخصص:</Text>
+                      <Text>{selectedApplication.specialization}</Text>
+                    </Group>
+                    <Group>
+                      <Text fw={500}>السنة الدراسية:</Text>
+                      <Text>{selectedApplication.academicYear}</Text>
+                    </Group>
+                  </Stack>
+                </Card>
+
+                {/* المجالات الإعلامية */}
+                <Card withBorder p="md">
+                  <Title order={4} mb="md">المجالات الإعلامية المطلوبة</Title>
+                  <Group>
+                    {selectedApplication.interestedFields.map((field, index) => (
+                      <Badge key={index} variant="light" color="blue">
+                        {translateFieldName(field.name)}
+                      </Badge>
+                    ))}
+                  </Group>
+                </Card>
+
+                {/* الخبرة السابقة */}
+                <Card withBorder p="md">
+                  <Title order={4} mb="md">الخبرة السابقة</Title>
+                  <Group>
+                    <Text fw={500}>هل لديك خبرة سابقة؟</Text>
+                    <Badge color={selectedApplication.hasExperience ? 'green' : 'red'}>
+                      {selectedApplication.hasExperience ? 'نعم' : 'لا'}
+                    </Badge>
+                  </Group>
+                  {selectedApplication.hasExperience && selectedApplication.experienceDetails && (
+                    <Text mt="sm" c="dimmed">
+                      {selectedApplication.experienceDetails}
+                    </Text>
+                  )}
+                </Card>
+
+                {/* روابط الأعمال */}
+                {selectedApplication.portfolioLinks && selectedApplication.portfolioLinks.length > 0 && (
+                  <Card withBorder p="md">
+                    <Title order={4} mb="md">أمثلة من الأعمال (Portfolio)</Title>
+                    <Stack gap="sm">
+                      {selectedApplication.portfolioLinks.map((link, index) => (
+                        <Text key={index}>
+                          <a href={link.url} target="_blank" rel="noopener noreferrer" style={{ color: '#1976d2' }}>
+                            رابط {index + 1}
+                          </a>
+                        </Text>
+                      ))}
+                    </Stack>
+                  </Card>
+                )}
+
+                {/* المعدات والبرامج */}
+                {selectedApplication.equipmentDetails && (
+                  <Card withBorder p="md">
+                    <Title order={4} mb="md">المعدات والبرامج المتوفرة</Title>
+                    <Text>{selectedApplication.equipmentDetails}</Text>
+                  </Card>
+                )}
+
+                {/* سبب الانضمام */}
+                <Card withBorder p="md">
+                  <Title order={4} mb="md">سبب الانضمام للفريق الإعلامي</Title>
+                  <Text>{selectedApplication.reasonToJoin}</Text>
+                </Card>
+
+                {/* معلومات إضافية */}
+                <Card withBorder p="md">
+                  <Title order={4} mb="md">معلومات إضافية</Title>
+                  <Stack gap="sm">
+                    <Group>
+                      <Text fw={500}>الحالة:</Text>
+                      <Badge color={
+                        selectedApplication.status === 'pending' ? 'yellow' :
+                        selectedApplication.status === 'accepted' ? 'green' : 'red'
+                      }>
+                        {selectedApplication.status === 'pending' ? 'قيد المراجعة' :
+                         selectedApplication.status === 'accepted' ? 'مقبول' : 'مرفوض'}
+                      </Badge>
+                    </Group>
+                    <Group>
+                      <Text fw={500}>تاريخ التقديم:</Text>
+                      <Text>{new Date(selectedApplication.createdAt).toLocaleDateString('ar-SA')}</Text>
+                    </Group>
+                    <Group>
+                      <Text fw={500}>آخر تحديث:</Text>
+                      <Text>{new Date(selectedApplication.updatedAt).toLocaleDateString('ar-SA')}</Text>
+                    </Group>
+                  </Stack>
+                </Card>
+              </Stack>
+            )}
+          </Modal>
+        </>
+      ) : (
+        <Alert title="لا توجد طلبات" color="blue">
+          لا يوجد أي طلبات انضمام مقدمة حتى الآن.
+        </Alert>
+      )}
+    </>
+  );
+}
+------------------------------------------------------------
+
+### ملف: D:\project\student-union\student-union-dashboard\src\pages\CollegesPage.tsx
+### مسار نسبي: src\pages\CollegesPage.tsx
+import { Title } from '@mantine/core';
+export function CollegesPage() { return <Title>صفحة إدارة الكليات</Title> }
+------------------------------------------------------------
+
+### ملف: D:\project\student-union\student-union-dashboard\src\pages\LoginPage.tsx
+### مسار نسبي: src\pages\LoginPage.tsx
+import { useForm } from '@mantine/form';
+import { TextInput, Button, Paper, Title, Stack, Alert } from '@mantine/core';
+import { useMutation } from '@tanstack/react-query';
+import { loginUser } from '../services/api';
+
+// تعريف أنواع البيانات
+interface LoginCredentials {
+  email: string;
+  password: string;
+}
+
+interface LoginResponse {
+  token: string;
+  user?: any;
+}
+
+interface ApiError {
+  response?: {
+    data?: {
+      message?: string;
+    };
+  };
+  message?: string;
+}
+
+export function LoginPage() {
+  // استخدام useMutation لإدارة حالة تسجيل الدخول
+  const mutation = useMutation<LoginResponse, ApiError, LoginCredentials>({
+    mutationFn: loginUser,
+    onSuccess: (data: LoginResponse) => {
+      // عند النجاح، قم بتخزين التوكن وتوجيه المستخدم
+      localStorage.setItem('authToken', data.token);
+      // window.location.href = '/'; // توجيه بسيط للمستخدم
+      window.location.href = '/'; 
+    },
+  });
+
+  // استخدام useForm الخاص بـ Mantine، فهو بسيط وممتاز
+  const form = useForm<LoginCredentials>({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    validate: {
+      email: (value: string) => (/^\S+@\S+$/.test(value) ? null : 'البريد الإلكتروني غير صحيح'),
+      password: (value: string) => (value.length < 8 ? 'كلمة المرور يجب أن تحتوي على 8 أحرف على الأقل' : null),
+    },
+  });
+
+  return (
+    <Stack align="center" justify="center" style={{ height: '100vh' }}>
+      <Paper withBorder shadow="md" p={30} radius="md" style={{ minWidth: 400 }}>
+        <Title ta="center" order={2} mb="xl">
+          تسجيل الدخول
+        </Title>
+        
+        <form onSubmit={form.onSubmit((values) => mutation.mutate(values))}>
+          <Stack>
+            <TextInput
+              required
+              label="البريد الإلكتروني"
+              placeholder="admin@example.com"
+              {...form.getInputProps('email')}
+            />
+            <TextInput
+              required
+              label="كلمة المرور"
+              placeholder="********"
+              type="password"
+              {...form.getInputProps('password')}
+            />
+            
+            {mutation.isError && (
+              <Alert color="red" title="خطأ في تسجيل الدخول">
+                {(mutation.error as ApiError)?.response?.data?.message || 'البريد الإلكتروني أو كلمة المرور غير صحيحة'}
+              </Alert>
+            )}
+            
+            <Button type="submit" fullWidth mt="xl" loading={mutation.isPending}>
+              دخول
+            </Button>
+          </Stack>
+        </form>
+      </Paper>
+    </Stack>
+  );
+}
+------------------------------------------------------------
+
+### ملف: D:\project\student-union\student-union-dashboard\src\router\index.tsx
+### مسار نسبي: src\router\index.tsx
+import { createBrowserRouter } from 'react-router-dom';
+import { LoginPage } from '../pages/LoginPage';
+import { DashboardLayout } from '../layouts/DashboardLayout';
+import { ProtectedRoute } from './ProtectedRoute';
+import { ApplicationsPage } from '../pages/ApplicationsPage';
+import { CollegesPage } from '../pages/CollegesPage';
+
+export const router = createBrowserRouter([
+  {
+    path: '/login',
+    element: <LoginPage />,
+  },
+  {
+    // مسار محمي جديد
+    path: '/',
+    element: <ProtectedRoute />, // 1. تحقق من تسجيل الدخول أولاً
+    children: [
+      {
+        // إذا نجح التحقق، اعرض DashboardLayout
+        path: '/', 
+        element: <DashboardLayout />,
+        // وهذه الصفحات ستظهر داخل <Outlet /> الخاص بـ DashboardLayout
+        children: [
+          {
+            index: true, // الصفحة الافتراضية عند الدخول على '/'
+            element: <ApplicationsPage />,
+          },
+          {
+            path: 'colleges',
+            element: <CollegesPage />,
+          },
+        ],
+      },
+    ],
+  },
+]);
+------------------------------------------------------------
+
+### ملف: D:\project\student-union\student-union-dashboard\src\router\ProtectedRoute.tsx
+### مسار نسبي: src\router\ProtectedRoute.tsx
+import { Navigate, Outlet } from 'react-router-dom';
+
+export const ProtectedRoute = () => {
+  // 1. التحقق من وجود التوكن
+  const token = localStorage.getItem('authToken');
+
+  // 2. إذا لم يكن التوكن موجودًا، قم بإعادة التوجيه إلى صفحة تسجيل الدخول
+  if (!token) {
+    // نستخدم مكون <Navigate> لإعادة التوجيه
+    return <Navigate to="/login" replace />;
+  }
+
+  // 3. إذا كان التوكن موجودًا، اعرض المحتوى المحمي (الذي هو في حالتنا لوحة التحكم)
+  // <Outlet /> هنا سيمثل `DashboardLayout` وكل صفحاته الفرعية
+  return <Outlet />;
+};
+------------------------------------------------------------
+
+### ملف: D:\project\student-union\student-union-dashboard\src\services\api.ts
+### مسار نسبي: src\services\api.ts
+// src/services/api.ts
+import axios from 'axios';
+
+// تعريف أنواع البيانات
+interface LoginCredentials {
+  email: string;
+  password: string;
+}
+
+interface LoginResponse {
+  token: string;
+  user?: any;
+}
+
+const apiClient = axios.create({
+  baseURL: 'http://localhost:3000/api/v1',
+});
+
+export const loginUser = async (credentials: LoginCredentials): Promise<LoginResponse> => {
+  const response = await apiClient.post('/users/login', credentials);
+  return response.data;
+};
+export interface Application {
+  id: string;
+  fullName: string;
+  phoneNumber: string;
+  college: string;
+  specialization: string;
+  academicYear: number;
+  interestedFields: Array<{
+    name: string;
+  }>;
+  hasExperience: boolean;
+  experienceDetails?: string;
+  portfolioLinks: Array<{
+    url: string;
+  }>;
+  equipmentDetails?: string;
+  reasonToJoin: string;
+  status: 'pending' | 'accepted' | 'rejected';
+  createdAt: string;
+  updatedAt: string;
+}
+
+// إضافة interceptor لإرسال التوكن مع كل طلب
+apiClient.interceptors.request.use((config) => {
+  const token = localStorage.getItem('authToken');
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+
+// دالة جديدة لجلب جميع الطلبات
+export const getApplications = async (): Promise<Application[]> => {
+  const response = await apiClient.get('/applications');
+  return response.data;
+};
+------------------------------------------------------------
+
+### ملف: D:\project\student-union\student-union-dashboard\src\utils\fieldMapping.ts
+### مسار نسبي: src\utils\fieldMapping.ts
+// Mapping للمجالات الإعلامية من الإنجليزية إلى العربية
+export const fieldMapping: Record<string, string> = {
+  'photography': 'التصوير الفوتوغرافي والفيديو',
+  'voiceover': 'التعليق الصوتي والتقديم',
+  'montage': 'المونتاج وتحرير الفيديو',
+  'graphic_design': 'التصميم الجرافيكي',
+  'content_writing': 'كتابة المحتوى الإعلامي',
+  'social_media': 'إدارة وسائل التواصل الاجتماعي',
+  'live_streaming': 'البث المباشر والتغطية الحية',
+};
+
+// دالة لترجمة اسم المجال
+export const translateFieldName = (fieldName: string): string => {
+  return fieldMapping[fieldName] || fieldName;
+};
+
+------------------------------------------------------------
+
